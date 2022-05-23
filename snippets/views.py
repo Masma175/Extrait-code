@@ -8,8 +8,8 @@ from snippets.serializers import SnippetSerializer
 # Create your views here.
 
 
-@api_view['GET', 'POST']
-def snippet_list(request):
+@api_view(['GET', 'POST'])
+def snippet_list(request, format=None):
     """ List des tous les extrait de code et creation d'un extrait """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
@@ -26,8 +26,8 @@ def snippet_list(request):
 
 
 
-@api_view['GET', 'PuT', 'DELETE']
-def snippet_detail(request, pk):
+@api_view(['GET', 'PuT', 'DELETE'])
+def snippet_detail(request, pk, format=None):
     """ Affichage , modification et suppression d'un extrait de code """
     try:
         snippet = Snippet.objects.get(pk=pk)
