@@ -55,7 +55,7 @@ from snippets.serializers import SnippetSerializer
 
 """ Vue basés sur les classes """
 
-class SnippetList(APIView):
+class snippet_list(APIView):
     """ Affichage , modification et suppression d'un extrait de code """
     def get(self, request, format=None):
         snippets = Snippet.objects.all()
@@ -71,7 +71,7 @@ class SnippetList(APIView):
 
 
 
-class Snippet_detail(APIView):
+class snippet_detail(APIView):
     """ Affichage , modification et suppression d'un extrait de code """
     def get_object(self, pk):
         try:
@@ -82,7 +82,19 @@ class Snippet_detail(APIView):
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
         serializer = SnippetSerializer(snippet, data=request.data)
+        return Response(serializer.data)
+        
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = SnippetSerializer(snippet, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
