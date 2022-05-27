@@ -9,6 +9,7 @@ from rest_framework.parsers import JSONParser# 'JSONParser' converti les donnée
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer, UserSerializer
 from rest_framework import permissions
+from snippets.permissions import IsOwnerOrReadOnly
 # Create your views here.
 
 """ Vues Basé sur les fonctions """
@@ -102,7 +103,7 @@ from rest_framework import permissions
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-""" Snippet Avec generics """
+""" Vuse du model Snippet Avec generics """
 
 class snippet_list(generics.ListCreateAPIView):
     queryset = Snippet.objects.all()
@@ -116,7 +117,7 @@ class snippet_list(generics.ListCreateAPIView):
 class snippet_etail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 """ Vues du model User """
