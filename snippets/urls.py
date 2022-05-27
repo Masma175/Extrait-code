@@ -62,3 +62,20 @@ urlpatterns = format_suffix_patterns([
 urlpatterns += [
     path('api-auth/', include('rest_framework.urls')),
 ]
+
+
+""" Utiliation des viewset avec le routeur """
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from snippets import views
+
+# Enregistrement des viewset dans les routers.
+router = DefaultRouter()
+router.register(r'snippets', views.SnippetViewSet,basename="snippets")
+router.register(r'users', views.UserViewSet,basename="users")
+
+# Les urls de l'API sont automatiquement gérés par le routeur.
+urlpatterns = [
+    path('', include(router.urls)),
+]
