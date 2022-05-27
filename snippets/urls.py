@@ -2,7 +2,7 @@ from django.urls import path, include
 # from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 # from snippets.views import SnippetList, SnippetDetail
-from snippets.views import UserDetail, UserList, snippet_list, snippet_detail
+from snippets.views import SnippetHighlight, UserDetail, UserList, snippet_list, snippet_detail
 
 
 
@@ -11,7 +11,8 @@ urlpatterns = [
     path('snippets/', snippet_list.as_view()),
     path('snippet/<int:pk>/', snippet_detail.as_view()),
     path('users/', UserList.as_view()),
-    path('users/<int:pk>/', UserDetail.as_view())
+    path('users/<int:pk>/', UserDetail.as_view()),
+    path('snippets/<int:pk>', SnippetHighlight.as_view())
 ]
 
 urlpatterns += [
