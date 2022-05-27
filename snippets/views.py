@@ -126,4 +126,3 @@ class UserDetail(generics.RetrieveAPIView):
     """ Vue detail User """
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
