@@ -14,6 +14,9 @@ urlpatterns = [
     path('users/<int:pk>/', UserDetail.as_view())
 ]
 
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
+]
 # router = routers.DefaultRouter()
 # router.register(r'list_snippets', SnippetList)
 # router.register(r'list_snippets', SnippetDetail)
