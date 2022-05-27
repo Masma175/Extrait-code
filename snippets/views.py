@@ -3,14 +3,25 @@ from django.contrib.auth.models import User
 from rest_framework import status, generics
 from django.http import Http404, HttpResponse, JsonResponse # 'JsonResponse'  est utilisé pour créer une réponse JSON
 from django.views.decorators.csrf import csrf_exempt
-# from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser# 'JSONParser' converti les données d'une chaîne écrite au format JSON en un objet JSON qui représente la chaîne
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer, UserSerializer
 from rest_framework import permissions
 from snippets.permissions import IsOwnerOrReadOnly
+from rest_framework.reverse import reverse
 # Create your views here.
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    """ Point d'entrer de l'api """
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'users': reverse('snippets', request=request, format=format),
+    })
+
+
 
 """ Vues Basé sur les fonctions """
 
