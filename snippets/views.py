@@ -114,7 +114,7 @@ class snippet_list(generics.ListCreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class snippet_etail(generics.RetrieveUpdateDestroyAPIView):
+class snippet_detail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]

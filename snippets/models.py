@@ -24,7 +24,7 @@ class Snippet(models.Model):
     def save(self, *args, **kwargs):
         """ Utilisation de la bibliotheque 'pygments' pour creer un code HTML en surbrillance, representant l'extrait de code """
         lexer = get_lexer_by_name(self.language)
-        linenos =  'table' if self.lineos else False
+        linenos =  'table' if self.linenos else False
         options = {'title': self.title} if self.title else {}
         formatter = HtmlFormatter(style=self.style, linenos=linenos, full=True, **options)
         self.highlighted = highlight(self.code, lexer, formatter)
